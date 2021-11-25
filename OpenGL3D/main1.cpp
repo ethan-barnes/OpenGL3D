@@ -54,20 +54,24 @@ int main(void)
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 
-	// Read our .obj file
-	std::vector< glm::vec3 > vertices;
-	std::vector< glm::vec2 > uvs;
-	std::vector< glm::vec3 > normals; // Won't be used at the moment.
-	bool res = loadOBJ("boxstack.obj", vertices, uvs, normals);
+	// Read .obj file
+	//std::vector<glm::vec3> vertices;
+	//std::vector<glm::vec2> uvs;
+	//std::vector<glm::vec3> normals; // Won't be used at the moment.
+	//bool res = loadOBJ("boxstack.obj", vertices, uvs, normals);
 
-	//objl::Loader loader;
-	//loader.LoadFile("boxstack.obj");
-	//
-	//for (int i = 0; i < loader.LoadedVertices.size(); i++) {
-	//	vertices[i].x = loader.LoadedVertices[i].Position.X;
-	//	vertices[i].y = loader.LoadedVertices[i].Position.Y;
-	//	vertices[i].z = loader.LoadedVertices[i].Position.Z;
-	//}
+	objl::Loader loader;
+	loader.LoadFile("boxstack.obj");
+
+	std::vector<float> vertices;
+	for (int i = 0; i < loader.LoadedVertices.size(); i++) {
+		vertices.push_back(loader.LoadedVertices[i].Position.X);
+		vertices.push_back(loader.LoadedVertices[i].Position.Y);
+		vertices.push_back(loader.LoadedVertices[i].Position.Z);
+		vertices.push_back(0.5f);
+		vertices.push_back(0.5f);
+		vertices.push_back(0.5f);
+	}
 
     // ================================
     // buffer setup
